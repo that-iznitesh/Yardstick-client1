@@ -6,9 +6,11 @@ export default function AdminPage({ token }) {
   const [password, setPassword] = useState("")
   const [slug, setSlug] = useState("")
 
+const API = import.meta.env.VITE_API_URL;
+
   async function inviteUser(e) {
     e.preventDefault()
-    const res = await fetch("http://localhost:4000/admin/invite", {
+    const res = await fetch(`${API}/admin/invite`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,8 +28,9 @@ export default function AdminPage({ token }) {
     }
   }
 
+
   async function upgradeTenant() {
-    const res = await fetch(`http://localhost:4000/admin/tenants/${slug}/upgrade`, {
+    const res = await fetch(`${API}/admin/tenants/${slug}/upgrade`, {
       method: "POST",
       headers: { Authorization: "Bearer " + token },
     })

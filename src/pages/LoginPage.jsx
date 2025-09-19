@@ -6,9 +6,11 @@ export default function LoginPage({ onLogin }) {
   const [password, setPassword] = useState("")
   const [isAdmin, setIsAdmin] = useState(false)
 
+  const API = import.meta.env.VITE_API_URL;
+
   async function handleSubmit(e) {
     e.preventDefault()
-    const res = await fetch("http://localhost:4000/auth/login", {
+    const res = await fetch(`${API}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -6,8 +6,10 @@ export default function NotesPage({ token }) {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
 
+  const API = import.meta.env.VITE_API_URL;
+
   async function fetchNotes() {
-    const res = await fetch("http://localhost:4000/notes", {
+    const res = await fetch(`${API}/notes`, {
       headers: { Authorization: "Bearer " + token },
     })
     if (res.ok) {
@@ -16,8 +18,9 @@ export default function NotesPage({ token }) {
   }
 
   async function createNote(e) {
+
     e.preventDefault()
-    const res = await fetch("http://localhost:4000/notes", {
+    const res = await fetch(`${API}/notes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +39,8 @@ export default function NotesPage({ token }) {
   }
 
   async function deleteNote(id) {
-    await fetch("http://localhost:4000/notes/" + id, {
+
+    await fetch(`${API}/notes` + id, {
       method: "DELETE",
       headers: { Authorization: "Bearer " + token },
     })
